@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     await connectDB();
 
     const body = await req.json();
+    console.log(body);
     const { name, email, password } = body;
 
     const user = await authService.register(name, email, password);

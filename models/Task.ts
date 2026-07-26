@@ -1,6 +1,6 @@
-import mongoose, { InferSchemaType } from "mongoose";
+import { Schema, models, model, type InferSchemaType } from "mongoose";
 
-const TaskSchema = new mongoose.Schema(
+const TaskSchema = new Schema(
   {
     title: {
       type: String,
@@ -25,12 +25,12 @@ const TaskSchema = new mongoose.Schema(
       required: true,
     },
     customer: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Customer",
       required: true,
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -42,6 +42,6 @@ const TaskSchema = new mongoose.Schema(
 
 export type TaskType = InferSchemaType<typeof TaskSchema>;
 
-const Task = mongoose.model("Task", TaskSchema) || mongoose.models.Task;
+const Task = models.Task || model("Task", TaskSchema);
 
 export default Task;

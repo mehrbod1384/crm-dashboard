@@ -1,13 +1,18 @@
-import mongoose, { InferSchemaType } from "mongoose";
+import mongoose, {
+  Schema,
+  models,
+  model,
+  type InferSchemaType,
+} from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     name: {
       type: String,
       required: [true, "Name is required"],
-      trinm: true,
-      minlength: [2, "Name must be at least 2 charecters"],
-      maxlength: [30, "Name must be at most 30 charecters"],
+      trim: true,
+      minlength: [2, "Name must be at least 2 characters"],
+      maxlength: [100, "Name must be at most 100 characters"],
     },
     email: {
       type: String,
@@ -19,7 +24,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: [6, "Password must be at least 6 charecters"],
+      minlength: [6, "Password must be at least 6 characters"],
       select: false,
     },
     avatar: {
@@ -34,6 +39,6 @@ const UserSchema = new mongoose.Schema(
 
 export type UserType = InferSchemaType<typeof UserSchema>;
 
-const User = mongoose.model("User", UserSchema) || mongoose.models.User;
+const User = models.User || model("User", UserSchema);
 
 export default User;

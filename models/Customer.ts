@@ -1,13 +1,18 @@
-import mongoose, { InferSchemaType } from "mongoose";
+import mongoose, {
+  Schema,
+  models,
+  model,
+  type InferSchemaType,
+} from "mongoose";
 
-const CustomerSchema = new mongoose.Schema(
+const CustomerSchema = new Schema(
   {
     name: {
       type: String,
       required: [true, "Customer name is required"],
       trim: true,
-      minlength: [2, "Customer name must be at least 2 charecters"],
-      maxlength: [50, "Customer name must be at most 50 charecters"],
+      minlength: [2, "Customer name must be at least 2 characters"],
+      maxlength: [120, "Customer name must be at most 120 characters"],
     },
     phone: {
       type: String,
@@ -36,7 +41,7 @@ const CustomerSchema = new mongoose.Schema(
       trim: true,
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -48,7 +53,6 @@ const CustomerSchema = new mongoose.Schema(
 
 export type CustomerType = InferSchemaType<typeof CustomerSchema>;
 
-const Customer =
-  mongoose.model("Customer", CustomerSchema) || mongoose.models.Customer;
+const Customer = models.Customer || model("Customer", CustomerSchema);
 
 export default Customer;

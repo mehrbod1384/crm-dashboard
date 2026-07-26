@@ -1,14 +1,14 @@
-import mongoose, { InferSchemaType } from "mongoose";
+import { Schema, models, model, type InferSchemaType } from "mongoose";
 
-const ActivitySchema = new mongoose.Schema(
+const ActivitySchema = new Schema(
   {
     customer: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Customer",
       required: true,
     },
     owner: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -21,7 +21,7 @@ const ActivitySchema = new mongoose.Schema(
       type: String,
       required: [true, "Activity content is required"],
       trim: true,
-      maxlength: [1000, "Activity content must be at most 1000 charecters"],
+      maxlength: [1000, "Activity content must be at most 1000 characters"],
     },
   },
   {
@@ -31,7 +31,6 @@ const ActivitySchema = new mongoose.Schema(
 
 export type ActivityType = InferSchemaType<typeof ActivitySchema>;
 
-const Activity =
-  mongoose.model("Activity", ActivitySchema) || mongoose.models.Activity;
+const Activity = models.Activity || model("Activity", ActivitySchema);
 
 export default Activity;
