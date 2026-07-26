@@ -1,61 +1,47 @@
-import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
+import * as customerService from "@/features/customers/customerService";
+import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-user";
-import Customer from "@/models/Customer";
+import { handleApiError } from "@/lib/errors/handleApiError";
+import { AppError } from "@/lib/errors/AppError";
 
 export async function GET() {
   try {
-    const user = await getCurrentUser();
-
-    if (!user) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-    }
-
     await connectDB();
 
-    const customers = await Customer.find({ owner: user.id }).sort({
-      createdAt: -1,
-    });
+    const user = await getCurrentUser();
+
+    const customers = await customerService.getAll(user);
 
     return NextResponse.json({ customers }, { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 },
-    );
+    return handleApiError(error);
   }
 }
 
 export async function POST(req: Request) {
   try {
+    await connectDB();
+
     const user = await getCurrentUser();
 
     if (!user) {
-      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+      throw new AppError("Unauthorized", 401);
     }
 
     const body = await req.json();
 
     const { name, phone, email = "", company = "", notes = "" } = body;
 
-    if (!name || !phone) {
-      return NextResponse.json(
-        { message: "Name and phone are required" },
-        { status: 400 },
-      );
-    }
-
-    await connectDB();
-
-    const customer = await Customer.create({
+    const customer = await customerService.create(
+      user.id,
       name,
       phone,
       email,
       company,
       notes,
-      owner: user.id,
-    });
+    );
 
     return NextResponse.json(
       { message: "Customer created successfully", customer },
@@ -63,9 +49,6 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 },
-    );
+    return handleApiError(error);
   }
 }

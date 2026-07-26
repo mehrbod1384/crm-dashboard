@@ -1,46 +1,16 @@
-import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
-import User from "@/models/User";
-import { comparePassword } from "@/lib/password";
-import { signToken } from "@/lib/token";
+import * as authService from "@/features/auth/authService";
+import { NextResponse } from "next/server";
+import { handleApiError } from "@/lib/errors/handleApiError";
 
 export async function POST(req: Request) {
   try {
+    await connectDB();
+
     const body = await req.json();
     const { email, password } = body;
 
-    if (!email || !password) {
-      return NextResponse.json(
-        { message: "Email and password are required" },
-        { status: 400 },
-      );
-    }
-
-    await connectDB();
-
-    const user = await User.findOne({ email }).select("+password");
-
-    if (!user) {
-      return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 401 },
-      );
-    }
-
-    const isValid = await comparePassword(password, user.password);
-
-    if (!isValid) {
-      return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 401 },
-      );
-    }
-
-    const token = signToken({
-      userId: user._id.toString(),
-      email: user.email,
-      name: user.name,
-    });
+    const { user, token } = await authService.login(email, password);
 
     const response = NextResponse.json(
       {
@@ -65,9 +35,6 @@ export async function POST(req: Request) {
     return response;
   } catch (error) {
     console.error(error);
-    return NextResponse.json(
-      { message: "Something went wrong" },
-      { status: 500 },
-    );
+    return handleApiError(error);
   }
 }
