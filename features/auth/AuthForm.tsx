@@ -72,7 +72,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
       );
 
       if (isLogin) {
-        router.push("/customers");
+        router.push("/");
         router.refresh();
       } else {
         router.push("/auth/login");
