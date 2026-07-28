@@ -1,4 +1,4 @@
-import * as authService from "@/features/auth/authService";
+import * as authService from "@/features/auth/service/authService";
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import { handleApiError } from "@/lib/errors/handleApiError";
@@ -16,11 +16,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         message: "User created successfully",
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-        },
+        data: user,
       },
       { status: 201 },
     );

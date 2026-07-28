@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth-user";
-import * as customerService from "@/features/customers/customerService";
+import * as customerService from "@/features/customers/service/customerService";
 import { NextResponse } from "next/server";
 import { AppError } from "@/lib/errors/AppError";
 import { handleApiError } from "@/lib/errors/handleApiError";
@@ -21,7 +21,7 @@ export async function GET(_: Request, { params }: Params) {
 
     const customer = await customerService.get(id, user.id);
 
-    return NextResponse.json({ customer }, { status: 200 });
+    return NextResponse.json({ data: customer }, { status: 200 });
   } catch (error) {
     console.error(error);
     return handleApiError(error);
@@ -41,7 +41,7 @@ export async function PATCH(req: Request, { params }: Params) {
     const customer = await customerService.update(id, user.id, body);
 
     return NextResponse.json(
-      { message: "Customer updated successfully", customer },
+      { message: "Customer updated successfully", data: customer },
       { status: 200 },
     );
   } catch (error) {

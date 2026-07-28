@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/db";
-import * as authService from "@/features/auth/authService";
+import * as authService from "@/features/auth/service/authService";
 import { NextResponse } from "next/server";
 import { handleApiError } from "@/lib/errors/handleApiError";
 
@@ -15,11 +15,7 @@ export async function POST(req: Request) {
     const response = NextResponse.json(
       {
         message: "Login successful",
-        user: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-        },
+        data: user,
       },
       { status: 200 },
     );

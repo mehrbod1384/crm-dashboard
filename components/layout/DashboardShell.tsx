@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Menu } from "lucide-react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import type { AuthUser } from "@/lib/auth-user";
@@ -16,7 +15,7 @@ export default function DashboardShell({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-900 text-slate-900">
       <Sidebar
         user={user}
         mobileOpen={mobileOpen}

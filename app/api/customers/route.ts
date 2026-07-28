@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/db";
-import * as customerService from "@/features/customers/customerService";
+import * as customerService from "@/features/customers/service/customerService";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-user";
 import { handleApiError } from "@/lib/errors/handleApiError";
@@ -11,9 +11,9 @@ export async function GET() {
 
     const user = await getCurrentUser();
 
-    const customers = await customerService.getAll(user);
+    const customers = await customerService.getAll(user!);
 
-    return NextResponse.json({ customers }, { status: 200 });
+    return NextResponse.json({ data: customers }, { status: 200 });
   } catch (error) {
     console.error(error);
     return handleApiError(error);
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     );
 
     return NextResponse.json(
-      { message: "Customer created successfully", customer },
+      { message: "Customer created successfully", data: customer },
       { status: 201 },
     );
   } catch (error) {
