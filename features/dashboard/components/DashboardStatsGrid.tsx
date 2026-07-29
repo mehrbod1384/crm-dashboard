@@ -1,21 +1,17 @@
+"use client";
+
 import { BadgeCheck, Clock3, UserPlus, Users } from "lucide-react";
 import DashboardStatCard from "./DashboardStatCard";
+import StatCardSkeleton from "./StatCardSkeleton";
+import { useDashboard } from "../hook/useDashboard";
 
-type Props = {
-  total: number;
-  newCount: number;
-  contacted: number;
-  won: number;
-  loading?: boolean;
-};
+export default function DashboardStatsGrid() {
+  const { data: customersData, isLoading } = useDashboard();
 
-export default function DashboardStatsGrid({
-  total,
-  newCount,
-  contacted,
-  won,
-  loading = false,
-}: Props) {
+  if (isLoading) return <StatCardSkeleton />;
+
+  const { total, newCount, contacted, won } = customersData;
+
   const cards = [
     {
       label: "Total Customers",
@@ -46,7 +42,7 @@ export default function DashboardStatsGrid({
   return (
     <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {cards.map((card) => (
-        <DashboardStatCard key={card.label} {...card} loading={loading} />
+        <DashboardStatCard key={card.label} {...card} />
       ))}
     </section>
   );

@@ -1,14 +1,18 @@
-import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/lib/auth-user";
-import DashboardShell from "@/components/layout/DashboardShell";
-import { Toaster } from "react-hot-toast";
+"use client";
 
-export default async function DashboardLayout({
+import { redirect } from "next/navigation";
+import DashboardShell from "@/components/layout/DashboardShell";
+import { useProfile } from "@/features/settings/hooks/useProfile";
+import PageLoader from "@/components/ui/PageLoader";
+
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = await getCurrentUser();
+  const { data: user, isLoading } = useProfile();
+
+  if (isLoading) return <PageLoader />;
 
   if (!user) {
     redirect("/auth/login");

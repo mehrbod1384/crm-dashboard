@@ -1,36 +1,251 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 CRM Dashboard
 
-## Getting Started
+A modern and responsive CRM Dashboard built with **Next.js 16**, **React 19**, **TypeScript**, and **MongoDB**.
+The project focuses on clean architecture, reusable components, scalable code structure, and a modern user experience.
 
-First, run the development server:
+---
+
+## 📸 Screenshots
+
+### Dashboard (Light)
+
+![Dashboard](./screenshots/dashboard-light.png)
+
+---
+
+### Dashboard (Dark)
+
+![Dashboard Dark](./screenshots/dashboard-dark.png)
+
+---
+
+### Customers
+
+![Customers](./screenshots/customers.png)
+
+---
+
+# ✨ Features
+
+### Authentication
+
+- JWT Authentication
+- Secure HTTP Cookies
+- Protected Routes
+- Automatic Redirect
+- Logout
+
+---
+
+### Dashboard
+
+- Statistics Cards
+- Recent Customers
+- Responsive Layout
+- Loading Skeletons
+
+---
+
+### Customer Management
+
+- Create Customer
+- Edit Customer
+- Delete Customer
+- Customer Details
+- Status Badges
+- Dropdown Actions
+- Confirmation Modal
+
+---
+
+### Settings
+
+- Update Profile
+- Theme Switcher
+- Dark / Light / System Mode
+- Logout
+
+---
+
+### User Experience
+
+- Responsive Design
+- Loading States
+- Skeleton Screens
+- Toast Notifications
+- Clean Animations
+
+---
+
+# 🛠 Tech Stack
+
+### Frontend
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- React Hook Form
+- TanStack React Query
+- Axios
+- Lucide React
+- next-themes
+
+### Backend
+
+- Next.js Route Handlers
+- MongoDB
+- Mongoose
+- JWT Authentication
+
+---
+
+# 📁 Folder Structure
+
+```text
+src
+│
+├── app
+│   ├── api
+│   ├── dashboard
+│   ├── customers
+│   ├── settings
+│   └── auth
+│
+├── components
+│
+├── features
+│   ├── auth
+│   ├── customers
+│   ├── dashboard
+│   └── settings
+│
+│
+├── lib
+│
+├── models
+│
+└── providers
+```
+
+---
+
+# ⚙️ Getting Started
+
+Clone the repository
+
+```bash
+git clone https://github.com/mehrbod1384/crm-dashboard.git
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🔐 Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env.local` file.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+DATABASE=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+JWT_SECRET=
 
-## Deploy on Vercel
+APP_URL=http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 📡 API Routes
+
+## Authentication
+
+```text
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/logout
+```
+
+---
+
+## Profile
+
+```text
+GET    /api/auth/profile
+PATCH  /api/auth/profile
+```
+
+---
+
+## Customers
+
+```text
+GET    /api/customers
+POST   /api/customers
+PATCH  /api/customers/:id
+DELETE /api/customers/:id
+```
+
+---
+
+# 🎨 UI Highlights
+
+- Modern SaaS Design
+- Minimal Interface
+- Reusable Components
+- Responsive Layout
+- Dark Mode
+- Clean Typography
+- Smooth Loading Experience
+
+---
+
+# 🚀 Future Improvements
+
+- Pagination
+- Search
+- Filtering
+- Sorting
+- Customer Notes
+- Customer Timeline
+- Deals Pipeline
+- Tasks
+- Calendar
+- Charts & Analytics
+- Team Management
+- Role-Based Access Control
+
+---
+
+# 📈 Performance
+
+- React Query Caching
+- Axios API Layer
+- Modular Architecture
+- Reusable Hooks
+- Component-Based Design
+- Optimized Rendering
+
+---
+
+# 👨‍💻 Author
+
+**Mehrbod Moteghaedi**
+
+---

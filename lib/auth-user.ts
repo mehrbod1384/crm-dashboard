@@ -13,6 +13,8 @@ export type AuthUser = {
   id: string;
   name: string;
   email: string;
+  avatar: string;
+  createdAt: string;
 };
 
 export async function getCurrentUser(): Promise<AuthUser | null> {
@@ -27,7 +29,7 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
 
     await connectDB();
 
-    const user = await User.findById(decoded.userId).select("_id name email");
+    const user = await User.findById(decoded.userId);
 
     if (!user) {
       return null;
@@ -37,6 +39,8 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
       id: user._id.toString(),
       name: user.name,
       email: user.email,
+      avatar: user.avatar,
+      createdAt: user.createdAt,
     };
   } catch {
     return null;

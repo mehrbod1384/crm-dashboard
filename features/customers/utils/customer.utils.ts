@@ -1,4 +1,5 @@
 import { formatDistanceToNow } from "date-fns";
+import { Customer } from "./customer.types";
 
 export function safeDateLabel(date?: string) {
   if (!date) return "Recently";
@@ -10,13 +11,13 @@ export function safeDateLabel(date?: string) {
 }
 
 export function filterCustomers(
-  customers: any,
+  customers: [],
   search: string,
   activeStatus: string,
 ) {
   const q = search.trim().toLowerCase();
 
-  return customers.filter((customer) => {
+  return customers.filter((customer: Customer) => {
     const matchesSearch =
       !q ||
       customer.name.toLowerCase().includes(q) ||

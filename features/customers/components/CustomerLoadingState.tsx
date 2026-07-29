@@ -20,7 +20,7 @@ export default function CustomerLoadingState() {
                 key={index}
                 className="grid items-center grid-cols-6 gap-4 border-b border-slate-100 px-5 py-4 dark:border-zinc-800"
               >
-                <div className="h-4 w-40 rounded bg-slate-200 dark:bg-zinc-700" />
+                <div className="h-4 w-30 lg:w-40 rounded bg-slate-200 dark:bg-zinc-700" />
                 <div className="space-y-1">
                   <div className="h-3 w-24 rounded bg-slate-200 dark:bg-zinc-700" />
                   <div className="h-3 w-32 rounded bg-slate-200 dark:bg-zinc-700" />

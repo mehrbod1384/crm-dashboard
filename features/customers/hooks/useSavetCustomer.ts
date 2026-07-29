@@ -24,6 +24,10 @@ export function useSaveCustomer(onSuccess?: () => void) {
         queryKey: ["customers"],
       });
 
+      await queryClient.invalidateQueries({
+        queryKey: ["dashboard"],
+      });
+
       onSuccess?.();
     },
 
