@@ -88,7 +88,7 @@ export default function Sidebar({
             })}
           </nav>
 
-          <div className="mt-8 mb-8 sm:mb-0 rounded-3xl bg-slate-100 dark:bg-zinc-900 p-4">
+          <div className="hidden lg:block rounded-3xl bg-slate-100 dark:bg-zinc-900 p-4">
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-600 text-white">
                 <CircleUserRound className="h-5 w-5" />

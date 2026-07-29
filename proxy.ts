@@ -8,10 +8,10 @@ export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (!user && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/auth/login", request.url));
   }
 
-  if (user && pathname === "/login") {
+  if (user && pathname === "/auth/login") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
