@@ -143,7 +143,7 @@ export default function CustomerList({
               <CustomerActionsMenu
                 onDetails={() => onDetails(customer)}
                 onEdit={() => onEdit(customer)}
-                onDelete={() => onDelete(customer)}
+                onDelete={() => setDeleteCustomer(customer)}
               />
             </div>
 
