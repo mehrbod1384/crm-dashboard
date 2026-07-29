@@ -40,7 +40,7 @@ export default function CustomersPage() {
   const [detailsCustomer, setDetailsCustomer] = useState<Customer | null>(null);
   const [formModalOpen, setFormModalOpen] = useState(false);
 
-  const { data: customers = [], isLoading, isError } = useCustomers();
+  const { data: customers, isLoading, isError } = useCustomers();
   const deleteMutation = useDeleteCustomer();
 
   const filteredCustomers = useMemo(() => {

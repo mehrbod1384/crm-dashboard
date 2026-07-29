@@ -11,7 +11,7 @@ export function safeDateLabel(date?: string) {
 }
 
 export function filterCustomers(
-  customers: [],
+  customers: any,
   search: string,
   activeStatus: string,
 ) {
