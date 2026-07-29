@@ -17,7 +17,7 @@ export function filterCustomers(
 ) {
   const q = search.trim().toLowerCase();
 
-  return customers.filter((customer: Customer) => {
+  return customers?.filter((customer: Customer) => {
     const matchesSearch =
       !q ||
       customer.name.toLowerCase().includes(q) ||
